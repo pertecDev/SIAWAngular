@@ -1,0 +1,254 @@
+<div class="no-printme p-3 center" style="text-align: center;">
+  
+  <mat-icon (click)="imprimirPDF(data_cabecera_footer_proforma, data_detalle_proforma, data_detalle_etiqueta)" 
+  style="cursor: pointer;color: #093070;width: 50px !important;font-size: 34px !important; height: 35px !important;"> print </mat-icon>
+
+  
+  <mat-icon (click)="descargaPDF(data_cabecera_footer_proforma, data_detalle_proforma, data_detalle_etiqueta)" 
+  style="cursor: pointer;color: red;width: 50px !important;font-size: 34px !important; height: 35px !important;">picture_as_pdf</mat-icon>
+ 
+  <mat-icon (click)="vistaPreviaPDF(data_cabecera_footer_proforma, data_detalle_proforma, data_detalle_etiqueta)" 
+  style="cursor: pointer;color: #fbd800;width: 50px !important;font-size: 34px !important; height: 35px !important;">remove_red_eye</mat-icon>
+</div>
+
+<div id="content" style="background-color: white !important;">
+  <div class="header">
+    <div class="row">
+      <div class="col-sm-3 left">
+        <p style=" font-family: 'Courier New' !important;font-size: 1.22rem !important;">
+          <strong><u>{{ data_cabecera_footer_proforma.empresa }}</u></strong></p>
+      </div>
+      <div class="col-sm right">
+        <p class="pe" style="text-align: center !important; padding-left: 104px !important">{{ data_cabecera_footer_proforma.hora_impresion }}</p>
+      </div>
+      <div class="col-sm-4 right">
+        <p class="pe">{{ data_cabecera_footer_proforma.fecha_impresion }}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm left">
+        <p class="pe"> <strong>N.I.T :</strong>{{ data_cabecera_footer_proforma.rnit }} </p>
+      </div>
+      <div class="col-sm right">
+        <p class="pe">NR: {{ data_cabecera_footer_proforma.rnota_remision }} </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm left">
+        <p class="pe"><strong>Inicial: </strong> {{ data_cabecera_footer_proforma.inicial }}</p>
+      </div>
+      <div class="col-sm">
+      </div>
+      <div class="col-sm right">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3 left"></div>
+      <div class="col-sm-6 center">
+        <p class="pe"><strong>{{ data_cabecera_footer_proforma.titulo }}</strong></p>
+      </div>
+      <div class="col-sm-3"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm left">
+        <p class="pe"><strong>Tipo de Pago:</strong>{{ data_cabecera_footer_proforma.tipopago }} </p>
+      </div>
+      <div class="col-sm center">
+        <p class="pe"><strong>Almacen:</strong> {{ data_cabecera_footer_proforma.codalmacen }}</p>
+      </div>
+      <div class="col-sm right">Pagina 1 de 1</div>
+    </div>
+
+    <hr style="border: 1px solid black;width: 100%;margin-top: 0rem !important;margin-bottom: 0rem !important;">
+
+
+    <div class="row">
+      <div class="col-sm left" style="word-wrap: break-word;padding-right: 0px !important;">
+        <span class="pe" style="letter-spacing: -0.50px !important;">{{ data_cabecera_footer_proforma.rcodcliente }}
+          {{ data_cabecera_footer_proforma.rcliente }} {{ data_cabecera_footer_proforma.rnombre_comercial }}</span>
+
+      </div>
+      <div class="col-sm-2 left" style="padding-left: 0px !important;">
+        <p class="pe"><strong>Vendedor: </strong>{{ data_cabecera_footer_proforma.rcodvendedor }}</p>
+      </div>
+      <div class="col-sm-2 left">
+        <p class="pe">
+          <strong>Factor:</strong>{{ data_cabecera_footer_proforma.rtdc }}{{ data_cabecera_footer_proforma.rmonedabase }}
+        </p>
+      </div>
+      <div class="col-sm-3 left" style="color: #1212c5;">
+        <p class="pe"><strong>Fecha:</strong>
+          {{ data_cabecera_footer_proforma.rfecha }}
+        </p>
+      </div>
+    </div>    
+
+    <div class="row">
+      <div class="col-sm-7 left" style="padding-right: 0px !important;">
+        <span class="pe">{{ data_cabecera_footer_proforma.rdireccion }}</span>
+      </div>
+      <div class="col-sm-5 left">
+        <p class="pe"><strong>Teléfono: </strong> {{ data_detalle_etiqueta.telefono }}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-7 left">
+        <p class="pe"><strong>Punto: </strong> {{ data_cabecera_footer_proforma.rptoventa }}</p>
+      </div>
+
+      <div class="col-sm-5 left">
+        <p class="pe"><strong>Preparación: </strong>{{ data_cabecera_footer_proforma.rpreparacion }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="table_component_detalle" role="region" tabindex="0">
+    <table class="table-detalle">
+      <thead style="line-height: 0.8 !important;border-top: 1px solid black !important;
+          border-bottom: 1px solid black !important;">
+        <tr>
+          <th class="center" style="font-weight: 100 !important;">#</th>
+          <th class="center" style="font-weight: 100 !important;">CODIGO</th>
+          <th width="80%" class="center thdescrip" style="font-weight: 100 !important;">
+            <----------- DESCRIPCION ---------->
+          </th>
+
+          <th width="7%" class="center" style="font-weight: 100 !important;">UD.</th>
+          <th width="9%" class="right" style="font-weight: 100 !important;">CANT.PEDIDA</th>
+          <th class="center" style="font-weight: 100 !important; width: 20% !important;"></th>
+          <th width="5%" class="center" style="font-weight: 100 !important;">TP</th>
+          <th class="center" style="font-weight: 100 !important;">PRECIO UNIT.</th>
+          <th class="right" style="font-weight: 100 !important;">TOTAL</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let items of data_detalle_proforma" style="page-break-inside: avoid !important;">
+          <td class="center">{{ items.nroitem }}</td>
+          <td class="center">&nbsp;{{items.coditem}}&nbsp;</td>
+          <td>
+            <div class="row">
+              <div class="col-md left">
+                {{items.descripcion}}
+              </div>
+              <div class="col-md-4 left">{{items.medida}}</div>
+            </div>
+          </td>
+          <td class="center">{{ items.udm }}</td>
+          <td class="right">{{ items.cantidad | number:'1.2-2' }}</td>
+          <td class="right">_________</td>
+          <td class="center">{{ items.codtarifa }}</td>
+          <td class="center">{{ formatNumberTotalSub(items.precioneto) }}</td>
+          <td class="right">{{ formatNumberTotalSub2Decimals(items.total)  }}</td>
+        </tr>
+
+        <tr class="tr_linea"></tr>
+        <!-- fijo porq es el subtotal y total -->
+        <tr>
+          <td style="border: 0px;"></td>
+          <td style="border: 0px;"></td>
+          <td style="border: 0px;"></td>
+          <td style="border: 0px;"></td>
+          <td width="450" class="right" style="border: 0px;">
+            <strong>Peso Total:</strong>
+          </td>
+          <td width="250" class="left" style="border: 0px;">
+            {{ data_cabecera_footer_proforma.rpesototal | number:'2.2-2' }}
+            <strong>Kgr</strong>
+          </td>
+          <td class="right" style="border: 0px;"></td>
+          <td class="left" style="border: 0px;"><strong>Sub Total</strong> </td>
+          <td class="right" style="border: 0px;">
+            {{ formatNumberTotalSub2Decimals(data_cabecera_footer_proforma.rsubtotal )}}</td>
+        </tr>
+        <tr>
+          <td style="border: 0px;"></td>
+          <td style="border: 0px;"></td>
+          <td width="450" class="right" style="border: 0px;"></td>
+          <td class="left" style="border: 0px;"></td>
+          <td class="right" style="border: 0px;"></td>
+          <td class="right" style="border: 0px;"></td>
+          <td class="right" style="border: 0px;"></td>
+          <td class="left" style="border: 0px;"><strong>Recargos:</strong> </td>
+          <td class="right" style="border: 0px;">
+            {{ formatNumberTotalSub2Decimals(data_cabecera_footer_proforma.rrecargos) }}</td>
+        </tr>
+        <tr>
+          <td style="border: 0px;"></td>
+          <td style="border: 0px;"></td>
+          <td width="450" class="right" style="border: 0px;"></td>
+          <td class="left" style="border: 0px;"></td>
+          <td class="right" style="border: 0px;"></td>
+          <td class="right" style="border: 0px;"></td>
+          <td class="right" style="border: 0px;"></td>
+          <td class="left" style="border: 0px;"> <strong>Descuentos:</strong>
+            <hr style="border: 1px solid black;width: 100%;margin-top: 0rem !important;margin-bottom: 0rem !important;">
+          </td>
+          <td class="right" style="border: 0px;">
+            {{ formatNumberTotalSub2Decimals(data_cabecera_footer_proforma.rdescuentos) }}
+            <hr style="border: 1px solid black;width: 100%;margin-top: 0rem !important;margin-bottom: 0rem !important;">
+          </td>
+        </tr>
+
+        <tr>
+          <td style="border: 0px;"></td>
+          <td style="border: 0px;"></td>
+          <td width="450" class="right" style="border: 0px;"></td>
+          <td class="left" style="border: 0px;"></td>
+          <td class="right" style="border: 0px;"></td>
+          <td class="right" style="border: 0px;"></td>
+          <td class="right" style="border: 0px;"></td>
+          <td class="left" style="border: 0px;">
+            <!-- <hr style="border: 1px solid black;width: 100%;margin-top: 0rem !important;margin-bottom: 0rem !important;"> -->
+          </td>
+          <td class="right" style="border: 0px">
+            {{ formatNumberTotalSub2Decimals(data_cabecera_footer_proforma.rtotalimp) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <p class="pe">{{ data_cabecera_footer_proforma.rtotalliteral }} </p>
+    <p class="pe">{{ data_cabecera_footer_proforma.rdsctosdescrip }} </p>
+  </div>
+
+
+  <table class="footer-table" style="page-break-inside: avoid !important;">
+    <tbody>
+      <tr>
+        <td><strong>Medio de Transporte:</strong></td>
+        <td>{{ data_cabecera_footer_proforma.rtransporte }}</td>
+      </tr>
+      <tr>
+        <td><strong>Flete Pagado Por: </strong></td>
+        <td>{{ data_cabecera_footer_proforma.rfletepor }}</td>
+      </tr>
+      <tr>
+        <td><strong>Dirección: </strong></td>
+        <td>{{ data_cabecera_footer_proforma.rdireccion }}</td>
+      </tr>
+      <tr>
+        <td><strong>Observación: </strong></td>
+        <td>{{ data_cabecera_footer_proforma.robs }}</td>
+      </tr>
+      <tr>
+        <td><strong>Facturación: </strong></td>
+        <td>{{ data_cabecera_footer_proforma.rfacturacion }}</td>
+      </tr>
+      <tr>
+        <td><strong><u>Fecha Inicial: </u></strong></td>
+        <td>{{ data_cabecera_footer_proforma.crfecha_hr_inicial }} </td>
+      </tr>
+      <tr>
+        <td><strong><u>Fecha Autorizado: </u></strong></td>
+        <td>{{ data_cabecera_footer_proforma.crfecha_hr_autoriza }}</td>
+      </tr>
+    </tbody>
+  </table><br><br>
+</div>

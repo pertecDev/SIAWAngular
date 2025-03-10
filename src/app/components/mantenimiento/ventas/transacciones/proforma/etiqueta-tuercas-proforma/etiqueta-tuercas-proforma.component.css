@@ -1,0 +1,94 @@
+#content {
+  font-family: 'Arial' !important;
+  /* margin-left: 2mm;
+  margin-right: 2mm; */
+  /* margin-bottom: 10mm; */
+  /* margin-top: 2mm; */
+}
+
+@media print {
+  .no-printme  {
+		display: none;
+	}
+
+  body {
+    background-image: none;
+  }
+
+  .header {
+    top: 0;
+    width: 100%;
+  }
+
+  .footer-table {
+    /* position: fixed; */
+    bottom: 0;
+    width: 100%;
+    /* margin-top: 420px; */
+  }
+
+  .table_component_detalle{
+    /* margin-bottom: 60px; Para dejar espacio al pie de página */
+    font-size: 1.00rem !important;
+    border-spacing: 0px !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.50px !important;
+  }
+}
+/*Fin imprimir*/
+
+
+p{
+  font-size: 1.00rem !important;
+  margin-bottom: 0rem !important;
+  font-family: 'Arial' !important;
+}
+
+th{
+  font-size: 0.85rem;
+}
+
+td{
+  padding: .25rem !important;
+  font-size: 0.85rem !important;
+}
+
+span{
+    font-size: 1.40rem !important;
+}
+
+.table td, .table th{
+  padding: 0.25rem !important;
+}
+
+.cabecera p{
+  font-family: 'Courier New' !important;
+  font-size: 1.10rem !important;
+}
+
+.center{
+  text-align: center !important;
+}
+
+.right{
+  text-align: right !important;
+}
+
+.left{
+  text-align: left !important;
+}
+
+.col-3{
+  flex: 0 0 25% !important;
+  max-width: 23% !important;
+}
+
+
+@media print {
+	.no-printme  {
+		display: none;
+	}
+	/* .content  { */
+		/* /display: block; */
+	/* } */
+}

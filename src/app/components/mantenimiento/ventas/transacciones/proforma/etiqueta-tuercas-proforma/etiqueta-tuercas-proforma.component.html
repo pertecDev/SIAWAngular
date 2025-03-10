@@ -1,0 +1,118 @@
+<!-- <div class="no-printme">
+  <mat-icon (click)="printFunction()" style="cursor: pointer;color: rgb(101, 127, 162);">print</mat-icon>
+  <mat-icon (click)="generatePDF()" style="cursor: pointer;color: red;">picture_as_pdf</mat-icon>
+</div> -->
+
+<div class="no-printme" style="text-align: center;">
+  <!-- <mat-icon (click)="printFunction(data_cabecera_footer_proforma)" 
+  style="cursor: pointer;color: #093070;width: 50px !important;font-size: 34px !important; height: 35px !important;">
+    print</mat-icon> -->
+
+    <mat-icon (click)="mandarImprimirPDF(data_cabecera_footer_proforma, tuercas_detalle)" 
+  style="cursor: pointer;color: #093070;width: 50px !important;font-size: 34px !important; height: 35px !important;">
+    print</mat-icon>
+
+  <mat-icon (click)="generatePDFDownload(data_cabecera_footer_proforma, tuercas_detalle)" style="cursor: pointer;color: red;width: 50px !important;font-size: 34px !important; height: 35px !important;">
+    picture_as_pdf
+  </mat-icon>
+  
+  <mat-icon (click)="vistaPreviaPDF(data_cabecera_footer_proforma, tuercas_detalle)" 
+  style="cursor: pointer;color: #fbd800;width: 50px !important;font-size: 34px !important; height: 35px !important;">remove_red_eye</mat-icon>
+</div>
+
+
+
+
+
+
+<div id="content">
+  <div class="cabecera header">
+    <div class="row">
+      <div class="col-sm-3 left">
+        <p style="font-size: 1.22rem !important;"><strong><u>PERTEC S.R.L</u></strong></p>
+      </div>
+      <div class="col-sm right">
+        <p>{{ data_cabecera_footer_proforma.hora_impresion }}</p>
+      </div>
+      <div class="col-sm-4 right">
+        <p>{{ data_cabecera_footer_proforma.fecha_impresion }}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm left">
+        <p> <strong>N.I.T :</strong> {{ data_cabecera_footer_proforma.rnit }}</p>
+      </div>
+      <div class="col-sm right">
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 left"></div>
+      <div class="col-md-6 center">
+        <p><strong>{{ data_cabecera_footer_proforma.titulo }} SOLO TUERCAS</strong></p>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+      <div class="col-sm left">
+        <p class="pe"><strong>Tipo de Pago:</strong>{{ data_cabecera_footer_proforma.tipopago }} </p>
+      </div>
+      <div class="col-sm center">
+        <p class="pe"><strong>Almacen:</strong> {{ data_cabecera_footer_proforma.codalmacen }}</p>
+      </div>
+      <div class="col-sm right">
+        <p>Pagina 1 de 1</p>
+      </div>
+    </div>
+  </div>
+
+  <hr style="border: 1px solid black;width: 100%;margin-top: 0rem !important;margin-bottom: 0rem !important;">
+  
+  <div class="row table_component_detalle p-3">
+    <div class="col-3 p-1" *ngFor="let items of tuercas_detalle" style="border: 2px solid black; width: 100%; 
+    height: 140px;margin-right: 6px; text-align: center;page-break-inside: avoid !important;
+     display: flex; flex-direction: column; justify-content: center;">
+
+      <p><strong>{{ items.descripcion }}</strong></p>
+      <span><strong>{{ items.medida }}</strong></span>
+      <p><strong>{{ items.cantidad | number:'1.2-2' }}</strong></p>
+      <p><strong>{{ items.udm }}</strong></p>
+      <p><strong>(
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
+        </strong>
+      </p>
+    </div>
+  </div>
+  <hr>
+
+  <div class="row footer-table">
+    <div class="col">
+      <p style="text-align: center;"><strong><u>DETALLE TOTAL DE TUERCAS</u></strong></p>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th style="width: 8%;text-align: left;"><strong>CODIGO</strong></th>
+            <th style="text-align: left;"><strong>DESCRIPCION</strong></th>
+            <th style="text-align: center;"><strong>MEDIDA</strong></th>
+            <th style="text-align: center;"><strong>UD</strong></th>
+            <th style="text-align: right;"><strong>CANTIDAD</strong></th>
+            <th width="250px"></th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let tuercas of tuercas_detalle">
+          <tr>
+            <td style="text-align: left;">{{ tuercas.coditem }}</td>
+            <td style="text-align: left;">{{ tuercas.descripcion }}</td>
+            <td style="text-align: center;">{{ tuercas.medida }}</td>
+            <td style="text-align: center;">{{ tuercas.udm }}</td>
+            <td style="text-align: right;">{{ tuercas.cantidad | number:'1.2-2'}}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

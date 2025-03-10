@@ -1,0 +1,67 @@
+<section class="content" style="background-color: #ffffc0;font-family: 'Courier New', Courier, monospace !important;">
+  <div class="container-fluid">
+    <div class="p-2">
+      <hr>
+      <ng-container *ngIf="validacion;else valid">
+        <p>Para Ver Credito Disponible : &nbsp;<strong>{{ message.join(', ') }}</strong></p>
+      </ng-container>
+      <ng-template #valid>
+        <div style="text-align: center !important;">
+          <span>{{ credito_disponible.data.titulo }}</span>
+        </div>
+        <div style="text-align: center !important;">
+          <span><strong>{{ credito_disponible.data.subtitulo }}</strong></span>
+        </div>
+        <hr>
+
+        <div class="row">
+          <div class="col-md" style="text-align: justify !important;">
+            <table>
+              <tr>
+                <td class="td1">{{ credito_disponible?.data.limite?.text }}</td>
+                <td class="th2">{{ credito_disponible?.data.limite?.sld | number: '1.2-2' }} {{ limite_text }}</td>
+              </tr>
+              <tr>
+                <td class="td1">{{ credito_disponible?.data.anticipo?.text }}</td>
+                <td class="th2">{{ credito_disponible?.data.anticipo?.sld | number: '1.2-2' }} {{ anticipo_text }}</td>
+              </tr>
+              <tr>
+                <td class="td1">{{ credito_disponible?.data.deuLoc?.text }}</td>
+                <td class="th2">{{ credito_disponible?.data.deuLoc?.sld | number: '1.2-2' }} {{ deuLoc_text }}</td>
+              </tr>
+              <tr>
+                <td class="td1">{{ credito_disponible?.data.profApro?.text }}</td>
+                <td class="th2">{{ credito_disponible?.data.profApro?.sld | number: '1.2-2' }} {{ profApro_text }}</td>
+              </tr>
+              <tr>
+                <td class="td1">{{ credito_disponible?.data.profApAgs?.text }}</td>
+                <td class="th2">{{ credito_disponible?.data.profApAgs?.sld | number: '1.2-2' }} {{ profApAgs_text }}
+                </td>
+              </tr>
+              <tr>
+                <td class="td1">{{ credito_disponible?.data.profAct?.text }}</td>
+                <td class="th2">{{ credito_disponible?.data.profAct?.sld | number: '1.2-2' }} {{ profAct_text }}</td>
+              </tr>
+              <hr style="width: 153% !important;">
+              <tr>
+                <td>{{ credito_disponible?.data.saldo?.text }} </td>
+                <td>{{ credito_disponible?.data.saldo?.sld | number: '1.2-2' }} </td>
+              </tr>
+            </table>
+
+          </div>
+        </div>
+      </ng-template>
+      <div style="text-align: center !important;">
+        <button mat-raised-button class="btn btn-outline-primary form-control-sm mr-1" type="button"
+          (click)="aceptar();">
+          <span> Aceptar</span>
+        </button>
+
+        <button mat-raised-button class="btn btn-outline-primary form-control-sm mr-1" type="button" (click)="close();">
+          <span> Cerrar</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,109 @@
+<section class="content">
+  <div class="container-fluid"><br>
+    <div class="row">
+      <div class="col-md-9">
+        <mat-card-title style="font-size: 0.75rem;">Cantidad a Añadir</mat-card-title>
+      </div>
+      <div class="col-md-3 float-right">
+        <div class="text-right">
+          <mat-icon color="primary" (click)="close();">close</mat-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-2">
+      <div class="row">
+        <div class="col-md-3">
+          <mat-slide-toggle class="example-margin" [(ngModel)]="isCheckedCantidad" (change)="cantidadHabilitar()">
+            Cantidad Fija
+          </mat-slide-toggle>
+        </div>
+        <div class="col-md-9">
+          <input type="number" min="0" [disabled]="!isCheckedCantidad" [(ngModel)]="cantidad_input" #cantInput
+            id="cantInput">
+        </div>
+      </div>
+
+      <ng-container *ngIf="permiso_para_vista === true">
+        <hr>
+
+        <div class="row">
+          <div class="col-md-3">
+            <mat-slide-toggle class="example-margin" [(ngModel)]="isCheckedEmpaques" (change)="empaquesHabilitar();">
+              Cantidad por Empaques
+            </mat-slide-toggle>
+          </div>
+
+          <div class="col-md-4">
+            <input type="number" [disabled]="!isCheckedEmpaques" [(ngModel)]="empaques_input" min="0" #empaquesInput
+              id="empaques_input">
+          </div>
+
+          <div class="col-md-5">
+            <table>
+              <tbody>
+                <tr>
+                  <td style="float: left;"><u>Calcular Empa. por Precio</u></td>
+                  <td style="float: right;"><input type="checkbox" [disabled]="!isCheckedEmpaques" [checked]="precio"
+                      (change)="togglePrecio()"></td>
+                </tr>
+                <tr>
+                  <td style="float: left;"> <u>Calcular Empa. por Descuento &nbsp;&nbsp;&nbsp;</u></td>
+                  <td style="float: right;"><input type="checkbox" [disabled]="!isCheckedEmpaques" [checked]="desct"
+                      (change)="toggleDescuento()"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </ng-container>
+
+      <hr>
+
+      <div class="row">
+        <div class="col-md-3">
+          <mat-slide-toggle class="example-margin" [(ngModel)]="isCheckedEmpaque" (change)="empaqueHabilitar();">
+            Empaque Minimo
+          </mat-slide-toggle>
+        </div>
+        <div class="col-md-9">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="form-control-sm" style="margin-right: 5px;"><u>Precio de Ventas</u></span>
+            </div>
+            <input type="text" [(ngModel)]="cod_precio_venta_modal_codigo" (blur)="onLeavePrecioVenta($event)"
+              [disabled]="!isCheckedEmpaque" min="0" id="precio_input">
+            <div class="input-group-append">
+              <a class="btn btn-outline-primary form-control-sm" type="button"
+                style="border-color: #093070;padding: 5px;" (click)="modalPrecioVenta();">
+                <i class="fa fa-search"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="form-control-sm" style="margin-right: 1px;"><u>Desct. Especiales</u></span>
+            </div>
+
+            <input type="text" [(ngModel)]="code_desct" [disabled]="!isCheckedEmpaque">
+
+            <div class="input-group-append">
+              <a class="btn btn-outline-primary form-control-sm" type="button"
+                style="border-color: #093070;padding: 5px;" (click)="modalDescuentoEspecial();">
+                <i class="fa fa-search"></i>
+              </a>
+            </div>
+            <br>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div style="text-align: center;">
+        <button mat-raised-button color="primary" (click)="agregarItems();">
+          <i class="fa fa-cart-plus"></i> OK
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,192 @@
+#content {
+  /* margin: 10px; */
+  /*padding: 10px;*/
+  /* padding-right: 65px !important;  */
+  font-family: 'Courier New' !important;
+  /* width: 100%; */
+  font-size: 0.95rem !important;
+  size: auto;
+  margin-left: 4mm;
+  margin-right: 4mm;
+  margin-bottom: 10mm;
+  margin-top: 4mm;
+}
+
+
+@page { size: 8.5in 9in; 
+   margin-top: 4mm;
+  page-break-after: always;
+ }
+
+@media print {
+  .no-printme  {
+		display: none;
+	}
+  
+  body {
+    background-image: none;
+  }
+
+  /* #content {
+    margin-left: 2mm;
+    margin-right: 2mm;
+    margin-bottom: 5mm;
+    margin-top: 5mm;
+  } */
+
+
+  /* Ajustes para manejar márgenes en la impresión */
+  @page {
+    size: auto;
+    margin: 4mm;
+    font-size: 0.95rem !important;
+      page-break-after: always;
+  }
+
+  .thdescrip{
+    width: 80% !important;
+  }
+
+  .td td{
+    /* tamanio de letra del detalle */
+    font-size: 1.00rem !important;
+    border-spacing: 2px !important;
+    line-height: 0.4 !important;
+  }
+
+
+
+  .header {
+    /* position: fixed; */
+    top: 0;
+    width: 100%;
+    
+  }
+
+  .footer-table {
+    /* position: fixed; */
+    bottom: 0;
+    width: 100%;
+    text-align: left;
+  }
+
+  .table_component_detalle{
+    /* margin-bottom: 60px; Para dejar espacio al pie de página */
+    font-size: 1.00rem !important;
+    border-spacing: 0px !important;
+    line-height: 1.2 !important;
+    font-family: 'Courier New' !important;
+    letter-spacing: -0.50px !important;
+  }
+}
+
+
+
+
+
+
+.header {
+    /* position: fixed; */
+    top: 0;
+    width: 100%; 
+  }
+
+  .table_component_detalle {
+    margin-bottom: 60px; /* Para dejar espacio al pie de página */
+    font-size: 1.00rem !important;
+    border-spacing: 0px !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.50px !important;
+  }
+
+  .footer-table {
+    /* position: fixed; */
+    bottom: 0;
+    width: 100%;
+    text-align: left;
+    /* margin-top: 20px; */
+  }
+
+
+
+
+
+
+
+
+
+
+
+.pe{
+  font-size: 0.9rem !important;
+  margin-bottom: 0rem !important;
+  font-family: 'Courier New' !important;
+}
+
+table{
+  width: 100% !important;
+
+}
+.header-table td {
+  width: 41% !important;
+  font-size: 0.91rem !important;
+}
+.header-table{
+  width: 100% !important;
+}
+.center{
+  text-align: center !important;
+}
+
+.right{
+  text-align: right !important;
+}
+
+.left{
+  text-align: left !important;
+}
+
+row{
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+
+
+
+.table-detalle td{
+  /* tamanio de letra del detalle */
+  font-size: 1.00rem !important;
+  border-spacing: 0px !important;
+  line-height: 1.2 !important;
+  font-family: 'Courier New' !important
+}
+
+
+
+
+
+.tr_linea{
+  border: 1px solid black !important;
+}
+
+.footer-table {
+  width: 100% !important;
+  font-family: 'Courier New' !important;
+}
+
+.footer-table td{
+  /* border: 1px solid #c5c2c2; */
+  font-size: 0.90rem !important;
+}
+
+p{
+  margin-top: 0 !important;   
+  margin-bottom: 0rem !important;
+}
+
+
+/* para imprimir */
+.content {
+	display: none;
+}

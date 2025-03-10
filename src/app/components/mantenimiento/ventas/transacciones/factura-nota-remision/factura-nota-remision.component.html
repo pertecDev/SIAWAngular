@@ -1,0 +1,469 @@
+<section style="background-color:#ffe0c0 !important;margin-left: 0px;margin-right: 7.5px;flex: 1;
+        width: 100%;box-sizing: border-box;">
+  <div class="row">
+    <div class="col">
+      <button mat-raised-button class="btn btn-outline-secondary form-control-sm mr-1" type="submit">
+        <span><i class="fa fa-check" aria-hidden="true" style="color: #ffc107;"></i> Cerrar</span>
+      </button>
+
+      <button mat-raised-button class="btn btn-outline-secondary form-control-sm mr-1">
+        <span><i class="fa fa-save" aria-hidden="true" style="color: #ffc107;"></i> Limpiar</span>
+      </button>
+
+      <!-- <button mat-raised-button class="btn btn-outline-secondary form-control-sm mr-1" (click)="modalPDFFactura()">
+        <span><i class="fa fa-save" aria-hidden="true" style="color: #ffc107;"></i> Ver Factura Template</span>
+      </button> -->
+
+      <button mat-raised-button class="btn btn-outline-secondary form-control-sm mr-1" (click)="verificarConexionSIN();"
+        style="float: right !important;">
+        <span><i class="fa fa-cogs" aria-hidden="true" style="color: #ffc107;"></i>
+           Verificar Estado Conexion SIN
+        </span>
+      </button>     
+    </div>
+    <div class="col"></div>
+  </div>
+
+  <p-toast></p-toast>
+  
+  <mat-tab-group>
+    <mat-tab label="Facturación Electronica en Linea"><br>
+      <div class="mat-elevation-z2 p-2">
+        <strong>
+          <span>Datos Dosificación CUFD</span>
+        </strong>
+        <div class="row">
+          <div class="col-md-2">
+            <div class="input-group">
+              <div class="input-group-">
+                <span class="input-group-text form-control-sm" style="padding: 10px 0px 0px 19px;"><u>Almacen</u></span>
+              </div>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="almacn_parame_usuario_almacen"
+                [value]="almacn_parame_usuario_almacen" style="margin-left: 5px;" disabled>
+
+              <div class="input-group-append">
+                <button class="btn btn-outline-success form-control-sm" type="button" (click)="modalAlmacen();"
+                  style="border-color: #04b7048b;" matTooltip="Buscar Almacen" matTooltipClass="custom-tooltip"
+                  matTooltipPosition="above"><i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="input-group">
+              <div class="input-group-">
+                <span class="input-group-text form-control-sm" style="padding: 10px 0px 0px 5px;">
+                  <u># Caja Factura</u>
+                </span>
+              </div>
+              <input type="text" class="form-control form-control-sm" 
+              [ngModel]="num_caja" style="margin-left: 5px;" disabled>
+
+              <div class="input-group-append">
+                <button class="btn btn-outline-success form-control-sm" type="button" (click)="generarFactura();"
+                  style="border-color: #04b7048b;" matTooltip="Caja Factura" matTooltipClass="custom-tooltip"
+                  matTooltipPosition="above"><i class="fa fa-plug"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text form-control-sm" style="padding: 10px 0px 0px 19px;"><u>Fecha: </u></span>
+              </div>
+              <input type="date" class="form-control form-control-sm" style="margin-left: 5px;"
+                [(ngModel)]="fecha_actual" disabled>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text form-control-sm" style="padding: 10px 0px 0px 33px;"><u>CUFD</u></span>
+              </div>
+              <input type="text" class="form-control form-control-sm" style="margin-left: 5px;" [(ngModel)]="CUFD"
+                disabled>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text form-control-sm" style="padding: 0px 0px ;">
+                  <u>Cod. Control</u>
+                </span>
+              </div>
+              <input type="text" class="form-control form-control-sm" style="margin-left: 5px;"
+                [(ngModel)]="cod_control" disabled>
+            </div>
+          </div>
+          <div class="col-md-2"></div>
+          <div class="col-md-2">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text form-control-sm" style="padding: 10px 0px 0px 5px;">
+                  <u>Factura en: &nbsp;</u></span>
+              </div>
+              <input type="text" class="form-control form-control-sm" style="margin-left: 5px;"
+                style="background-color: black;color: yellow;" [(ngModel)]="moneda_get_catalogo" disabled>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mat-elevation-z2 p-2">
+        <strong>
+          <span>Nota de Remisión a Facturar</span>
+        </strong>
+        <div class="row">
+          <div class="col-md-2">
+            <div class="input-group">
+              <div class="input-group-">
+                <span class="input-group-text form-control-sm" style="padding: 10px 0px 0px 0px;">
+                  <u>Nota Remisión: </u>
+                </span>
+              </div>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="id_proforma_numero_id"
+                [value]="id_proforma_numero_id" style="margin-left: 5px;" disabled>
+
+              <div class="input-group-append">
+                <button class="btn btn-outline-success form-control-sm" type="button"
+                  (click)="modalCatalogoNotasDeRemision();" style="border-color: #04b7048b;"
+                  matTooltip="Catalogo Notas Remision" matTooltipClass="custom-tooltip" matTooltipPosition="above"><i
+                    class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <input type="text" class="form-control form-control-sm" [ngModel]="descrip_proforma_numero_id"
+              [value]="descrip_proforma_numero_id" style="margin-left: 5px;" disabled>
+          </div>
+          <div class="col-md-2" style="padding-left: 0px !important;">
+            <input type="text" class="form-control form-control-sm" [(ngModel)]="numero_id_nota_remision" 
+            id="input_numero_id_nota_remision" style="width: 35% !important;">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <div class="input-group">
+              <div class="input-group-">
+                <span class="input-group-text form-control-sm" style="padding: 10px 0px 0px 36px;">
+                  <u>Factura: </u>
+                </span>
+              </div>
+              <input type="text" class="form-control form-control-sm" [ngModel]="id_factura_catalogo"
+                [value]="id_factura_catalogo" style="margin-left: 5px;" disabled>
+              <div class="input-group-append">
+                <button class="btn btn-outline-success form-control-sm" type="button" (click)="modalCatalogoFacturas();"
+                  style="border-color: #04b7048b;" matTooltip="Catalogo Factura" matTooltipClass="custom-tooltip"
+                  matTooltipPosition="above"><i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <input type="text" class="form-control form-control-sm" [(ngModel)]="descrip_factura_catalogo"
+              [value]="descrip_factura_catalogo" style="margin-left: 5px;" disabled>
+          </div>
+          <div class="col-md-2" style="text-align: right;">
+            <button class="btn btn-outline-success form-control-sm right1" type="button" 
+              (click)="generarFacturaNRPOST(valProfDespachoForm, valFechaRemiHoyForm, valFactContadoForm, valTipoCamForm);"
+              style="border-color: #04b7048b;" matTooltip="Generar Factura" matTooltipClass="custom-tooltip"
+              matTooltipPosition="above"><i class="fa fa-cog"></i> Generar Factura
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="mat-elevation-z2 p-2">
+        <strong>
+          <span>Facturas Generadas</span>
+        </strong>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="input-group">
+              <div class="input-group-">
+                <span class="input-group-text form-control-sm" style="padding: 10px 1px 0px 23px;">
+                  <u>Facturar a: </u></span>
+              </div>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="nombre_cliente"
+                style="margin-left: 5px;"  style="background-color: black;color: yellow;" disabled>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="input-group">
+              <div class="input-group-">
+                <span class="input-group-text form-control-sm" style="padding: 8px 5px 0px 7px;">
+                  <u>N.I.T</u>
+                </span>
+              </div>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="nit_cliente"
+                style="margin-left: 5px;" style="background-color: black;color:
+                yellow;" disabled>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <input type="text" class="form-control form-control-sm" placeholder="Complemento"
+            [(ngModel)]="complemento_tipodocid_cliente"
+              style="padding: 0px 0px 0px 0px;background-color: black;color: yellow;" disabled>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <div class="input-group">
+              <div class="input-group-">
+                <span class="input-group-text form-control-sm" style="padding: 10px 2px 0px 0px;">
+                  <u>Condición I.V.A</u></span>
+              </div>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="condicionIVA_cliente"
+                style="margin-left: 5px;"  style="background-color: black;color:
+                yellow;" disabled>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="input-group">
+              <div class="input-group-">
+                <span class="input-group-text form-control-sm" style="padding: 8px 0px 0px 0px;">
+                  <u>Fecha</u>
+                </span>
+              </div>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="fecha_actual" 
+                style="margin-left: 5px;background-color: black;color: yellow;" disabled>
+            </div>
+          </div>
+          <div class="col-md-1">
+            </div>
+        </div>
+      </div>
+
+      <div class="mat-elevation-z2 p-2">
+        <div class="row">
+          <div class="col-lg">
+            <div class="team scrollmenu">
+              <div class="col-md-6 miTabGroupDetalle"
+                style="width: 100%;overflow-x: auto;overflow-y: scroll;overflow-x: scroll;">
+
+                <p-table [value]="lista_respuesta" [tableStyle]="{'min-width': '40rem'}"
+                  styleClass="p-datatable-striped tablitaDetalle" [metaKeySelection]="true" 
+                  sortMode="multiple">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th pSortableColumn="nroitem" class="center1" style="width:2%;">
+                        #
+                      </th>
+                      <th pSortableColumn="subtotal" class="right1" style="width:3%;">
+                        Sub-Total
+                      </th>
+                      <th pSortableColumn="descuentos" class="right1" style="width:3%;">
+                        Descuentos
+                      </th>
+                      <th pSortableColumn="recargos" style="width:3%;" class="right1">
+                        Recargos
+                      </th>
+                      <th pSortableColumn="monto_iva" class="right1" style="width:3%">
+                        Monto I.V.A
+                      </th>
+                      <th pSortableColumn="monto" class="right1" style="width:3%">
+                        Monto
+                      </th>
+                      <th pSortableColumn="total" class="right1" style="width:3%">
+                        Total
+                      </th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-lista_respuestas let-rowIndex="rowIndex">
+                    <tr [pSelectableRow]="lista_respuesta" [pSelectableRowIndex]="rowIndex" [ngStyle]="{height: '10px'}">
+                      <td class="center1" style="width:2%;">{{ lista_respuestas.nro }}</td>
+                      <td class="right1" style="width:3%;">{{ lista_respuestas.subtotal }}</td>
+                      <td class="right1" style="width:3%;">{{ lista_respuestas.descuentos }}</td>
+                      <td class="right1" style="width:3%;">{{ lista_respuestas.recargos }}</td>
+                      <td class="right1" style="width:3%;">{{ lista_respuestas.iva }}</td>
+                      <td class="right1" style="width:3%;">{{ lista_respuestas.monto }}</td>
+                      
+                      <td class="right1">{{ lista_respuestas.total }}</td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mat-elevation-z2 p-2" style="height: 154px !important;">
+        <div class="row">
+          <div class="col-md-2">
+            <div class="input-group">
+              <div class="input-group-">
+                <span class="input-group-text form-control-sm" style="padding: 10px 0px 0px 2px;">
+                  <u>Sub Total N. Remisión</u>
+                </span>
+              </div>
+              <input type="text" class="form-control form-control-sm" 
+              placeholder="0.00" [(ngModel)]="subtotal_cabecera"
+              style="text-align:right;margin-left: 2px;" disabled>
+            </div>
+            <div class="input-group">
+              <div class="input-group-">
+                <span class="input-group-text form-control-sm" style="padding: 10px 3px 0px 24px;">
+                  <u>Total
+                    Descuentos</u> </span>
+              </div>
+              <input type="text" class="form-control form-control-sm" 
+              placeholder="0.00" [(ngModel)]="descuentos_cabecera"
+              style="text-align:right;margin-left: 2px;" disabled>
+            </div>
+            <div class="input-group">
+              <div class="input-group-">
+                <span class="input-group-text form-control-sm"
+                style="padding: 10px 0px 0px 35px;"><u>Total Recargos</u>
+                </span>
+              </div>
+              <input type="text" class="form-control form-control-sm" 
+              placeholder="0.00" [(ngModel)]="recargos_cabecera"
+              style="text-align:right;margin-left: 5px;" disabled>
+            </div>
+            <div class="input-group">
+              <div class="input-group-">
+                <span class="input-group-text form-control-sm" style="padding: 10px 0px 0px 22px;">
+                  <u>Total N.
+                    Remisión</u> </span>
+              </div>
+              <input type="text" class="form-control form-control-sm" 
+              placeholder="0.00" [(ngModel)]="total_cabecera"
+              style="text-align:right;margin-left: 5px;" disabled>
+            </div>
+          </div>
+          <!-- <div class="col-md-2"></div> -->
+          <div class="col-md-2">
+            <div class="input-group">
+              <!-- <img width="75%" src="assets/img/descargar.png" alt="codigoQR"> -->
+              <qrcode [qrdata]="valor_string_QR" [width]="200" [colorLight]="'#ffe0c0'" [scale]="'4'"
+                [errorCorrectionLevel]="'L'">
+              </qrcode>
+            </div>
+          </div>
+          <!-- <div class="col-md-2"></div> -->
+          <div class="col-md-2">
+            <div class="input-group">
+              <div class="input-group-">
+                <span class="input-group-text form-control-sm" style="padding: 10px 0px 0px 55px;">
+                  <u>Total Factura</u></span>
+              </div>
+              <input type="text" class="form-control form-control-sm" placeholder="0.00"
+                [(ngModel)]="totalFacturaFooter" style="text-align:right;margin-left: 5px;" disabled>
+            </div>
+            <div class="row">
+              <div class="col">
+                <input type="text" class="form-control form-control-sm" placeholder="43"
+                  style="text-align:center;margin-left: 5px;" disabled>
+              </div>
+              <div class="col">
+                <input type="text" class="form-control form-control-sm" placeholder="11"
+                  style="text-align:center;margin-left: 5px;" disabled>
+              </div>
+            </div><br><br>
+
+            <div style="float: right;">
+              <button class="btn btn-outline-success form-control-sm" type="button"
+              (click)="openFormasDePago();" style="border-color: #04b7048b;" [disabled]="!CUFD && !nit_cliente">
+                <i class="fa fa-print" aria-hidden="true"></i> Grabar e Imprimir
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+
+
+    <mat-tab label="LOG de Transacciones">
+      <div style="background-color: black;color: yellow;">
+        <span>RESULTADO DE ENVIO DE FACTURA</span>
+      </div>
+      <p-listbox [options]="eventosLogs" [(ngModel)]="eventosLogs" optionLabel="label" [metaKeySelection]="false" scrollHeight="250px">
+      </p-listbox>
+      <br><br>
+    </mat-tab>
+
+
+    <mat-tab label="Resultados de Facturación">
+      <p-table [value]="" [tableStyle]="{'min-width': '60rem'}"
+        styleClass="p-datatable-striped-sm tablitaDetalle" 
+        [metaKeySelection]="true" dataKey="coditem" sortMode="multiple">
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="nroitem" class="center1" style="width:2%;">
+              Fecha
+            </th>
+            <th pSortableColumn="orden" class="center1" style="width:8%;">
+              Hora
+              <p-sortIcon class="iconGrid" field="orden" />
+            </th>
+            <th pSortableColumn="item" style="width:8%;" class="center1">
+              Usuario
+              <p-sortIcon field="item" />
+            </th>
+            <th pSortableColumn="descripcion" style="width:8%;" class="center">
+              ID DOC
+              <p-sortIcon field="descripcion" />
+            </th>
+            <th pSortableColumn="medida" class="center1" style="width:8%">
+              NRO ID DOC
+              <!-- <p-sortIcon field="medida"/> -->
+            </th>
+            <th pSortableColumn="%" class="right1" style="width:8%">
+              Ventana
+              <p-sortIcon field="Total" />
+            </th>
+            <th pSortableColumn="%" class="right1" style="width:8%">
+              Tipo
+              <p-sortIcon field="Total" />
+            </th>
+            <th pSortableColumn="%" class="right1" style="width:8%">
+              Detalle
+              <p-sortIcon field="Total" />
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-products let-rowIndex="rowIndex">
+          <tr [pSelectableRow]="products" [pSelectableRowIndex]="rowIndex" [ngStyle]="{height: '10px'}">
+            <td class="center1">{{ products.numero }}</td>
+            <td class="center1">{{ products.subtotal }}</td>
+            <td class="center1">{{ products.descuento }}</td>
+            <td class="center1">{{ products.recargos }}</td>
+            <td class="center1">{{ products.montoiva }}</td>
+            <td class="center1">{{ products.total }}</td>
+            <td class="center1">{{ products.total }}</td>
+            <td class="center1">{{ products.total }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text form-control-sm"
+            style="padding: 10px 0px 0px 0px;border: 0 !important;"><u>Fecha Limite</u></span>
+        </div>
+        <div class="col-md-3">
+
+          <input type="date" class="form-control form-control-sm" [(ngModel)]="fecha_actual" style="width: 60%;">
+          <button mat-raised-button class="btn btn-outline-secondary form-control-sm mr-1">
+            <span><i class="fa fa-cog" aria-hidden="true" style="color: #ffc107;"></i>
+              Refrescar LOG
+            </span>
+          </button>
+        </div>
+      </div>
+    </mat-tab>
+    <!-- <mat-tab label="Generación Automatica"> </mat-tab>
+    <mat-tab label="Archivos Para Correo"> </mat-tab> -->
+  </mat-tab-group>
+</section>
