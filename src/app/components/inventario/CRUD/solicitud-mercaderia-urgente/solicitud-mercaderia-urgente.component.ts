@@ -432,15 +432,9 @@ export class SolicitudMercaderiaUrgenteComponent implements OnInit {
     return this.api.getAll('/inventario/mant/intiposolurgente/catalogo/' + this.userConn)
       .subscribe({
         next: (datav) => {
-          // 
-          this.id_tipo_sol_urgente = datav;
-
-          
+          this.id_tipo_sol_urgente = datav;          
         },
-
-        error: (err: any) => {
-          
-        },
+        error: (err: any) => { },
         complete: () => { }
       })
   }
@@ -451,13 +445,10 @@ export class SolicitudMercaderiaUrgenteComponent implements OnInit {
     return this.api.getAll('/seg_adm/mant/vevendedor/catalogo/' + this.userConn)
       .subscribe({
         next: (datav) => {
-          // 
           this.vendedors_array = datav;
         },
 
-        error: (err: any) => {
-          
-        },
+        error: (err: any) => { },
         complete: () => { }
       })
   }
@@ -467,12 +458,10 @@ export class SolicitudMercaderiaUrgenteComponent implements OnInit {
     return this.api.getAll('/inventario/mant/intarifa/catalogo/' + this.userConn + "/" + this.usuarioLogueado)
       .subscribe({
         next: (datav) => {
-          
           this.array_precios = datav;
         },
 
-        error: (err: any) => {
-          
+        error: (err: any) => {  
         },
         complete: () => { }
       })
@@ -484,12 +473,9 @@ export class SolicitudMercaderiaUrgenteComponent implements OnInit {
       .subscribe({
         next: (datav) => {
           this.array_clientes = datav;
-          // 
         },
 
-        error: (err: any) => {
-          
-        },
+        error: (err: any) => {  },
         complete: () => { }
       })
   }
@@ -497,14 +483,9 @@ export class SolicitudMercaderiaUrgenteComponent implements OnInit {
   onLeaveIDSolUrgente(event: any) {
     const inputValue = event.target.value;
     let entero = Number(inputValue);
-
-    // Verificar si el valor ingresado está presente en los objetos del array
     const encontrado = this.id_tipo_sol_urgente.some(objeto => objeto.id === entero);
-
     if (!encontrado) {
-      // Si el valor no está en el array, dejar el campo vacío
       event.target.value = '';
-      
     } else {
       event.target.value = entero;
     }
@@ -513,14 +494,10 @@ export class SolicitudMercaderiaUrgenteComponent implements OnInit {
   onLeaveVendedor(event: any) {
     const inputValue = event.target.value;
     let entero = Number(inputValue);
-
-    // Verificar si el valor ingresado está presente en los objetos del array
     const encontrado = this.vendedors_array.some(objeto => objeto.codigo === entero);
 
     if (!encontrado) {
-      // Si el valor no está en el array, dejar el campo vacío
       event.target.value = '';
-      
     } else {
       event.target.value = entero;
     }
@@ -530,11 +507,9 @@ export class SolicitudMercaderiaUrgenteComponent implements OnInit {
     const inputValue = event.target.value;
     let entero = Number(inputValue);
 
-    // Verificar si el valor ingresado está presente en los objetos del array
     const encontrado = this.array_almacenes.some(objeto => objeto.codigo === entero);
 
     if (!encontrado) {
-      // Si el valor no está en el array, dejar el campo vacío
       event.target.value = '';
       
     } else {
@@ -545,13 +520,10 @@ export class SolicitudMercaderiaUrgenteComponent implements OnInit {
   onLeavePrecioVenta(event: any) {
     const inputValue = event.target.value;
     let entero = Number(inputValue);
-    // Verificar si el valor ingresado está presente en los objetos del array
     const encontrado = this.array_precios.some(objeto => objeto.codigo === entero);
 
     if (!encontrado) {
-      // Si el valor no está en el array, dejar el campo vacío
       event.target.value = 0;
-      // 
     } else {
       event.target.value = entero;
     }
@@ -560,37 +532,26 @@ export class SolicitudMercaderiaUrgenteComponent implements OnInit {
   onLeaveCliente(event: any) {
     const inputValue = event.target.value.toString();
     let entero = inputValue;
-    
-    // Verificar si el valor ingresado está presente en los objetos del array
     const encontrado = this.array_clientes.some(objeto => objeto.codigo === entero);
     const encontrado_element = this.array_clientes.find(objeto => objeto.codigo === entero);
 
-    
-
     if (!encontrado) {
-      // Si el valor no está en el array, dejar el campo vacío
       event.target.value = "";
-      // 
     } else {
       event.target.value = entero;
       this.nomcliente = encontrado_element.nombre
     }
   }
 
-  //Importar to ZIP
   async onFileChangeZIP(event: any) {
     const file = event.target.files[0];
-    
-
     if (file.type === 'application/x-zip-compressed' || file.type === 'application/zip') {
-      // Crear un FormData y agregar el archivo
       const formData = new FormData();
       formData.append('file', file, file.name);
 
       this.api.cargarArchivo('/inventario/transac/docinpedido/importPedidoinJson/', formData)
         .subscribe({
           next: (datav) => {
-            
             this.messageService.add({ severity: 'success', summary: 'Accion Completada', detail: 'ARCHIVO ZIP CARGADO EXITOSAMENTE ✅' })
             this.imprimir_zip_importado(datav);
 
@@ -599,7 +560,6 @@ export class SolicitudMercaderiaUrgenteComponent implements OnInit {
             }, 500);
           },
           error: (err: any) => {
-            
             this.messageService.add({ severity: 'error', summary: 'Error', detail: 'ERROR AL CARGAR EL ARCHIVO ❌' });
             setTimeout(() => {
               this.spinner.hide();
@@ -633,23 +593,6 @@ export class SolicitudMercaderiaUrgenteComponent implements OnInit {
   imprimir_zip_importado(zip_json) {
     let documento: any;
     this.spinner.show();
-
-    
-
-    // this.id = zip_json.cabeceraList[0]?.id;
-    // this.numeroid = zip_json.cabeceraList[0]?.numeroid;
-    // this.observaciones = zip_json.cabeceraList[0]?.obs;
-
-    // documento = zip_json.cabeceraList[0]?.documento
-
-    // if (documento === "PEDIDO") {
-    //   this.fecha_actual = this.datePipe.transform(zip_json.cabeceraList[0]?.fechareg, "yyyy-MM-dd");
-    //   this.codalmdestidoText = zip_json.cabeceraList[0]?.codalmdestino;
-    //   this.observaciones = zip_json.cabeceraList[0]?.obs;
-
-    //   this.array_items_carrito_y_f4_catalogo = zip_json.detalleList;
-    // }
-
     this.array_items_carrito_y_f4_catalogo = zip_json.detalleList;
     setTimeout(() => {
       this.spinner.hide();
@@ -663,8 +606,6 @@ export class SolicitudMercaderiaUrgenteComponent implements OnInit {
     return this.api.create('/inventario/transac/docinsolurgente/calcularDetalle/' + this.userConn + "/" + this.agencia_logueado + "/" + this.BD_storage + "/" + this.usuarioLogueado + "/" + this.codtarifa, array)
       .pipe(takeUntil(this.unsubscribe$)).subscribe({
         next: (datav) => {
-          
-          
           setTimeout(() => {
             this.spinner.hide()
           }, 1000);
@@ -771,11 +712,7 @@ export class SolicitudMercaderiaUrgenteComponent implements OnInit {
   onRowSelect(event: any) {
     this.item_obj_seleccionado = event.data;
     this.item_obj_seleccionado_codigo = event.data?.coditem;
-
-    
-
     this.getSaldoItem(event.data.coditem);
-
   }
 
   onRowSelectForDelete() {
@@ -812,21 +749,6 @@ export class SolicitudMercaderiaUrgenteComponent implements OnInit {
   onEditComplete(event: any) {
     const updatedElement = event.data; // La fila editada
     const updatedField = event.field; // El campo editado (en este caso, "empaque")
-
-    
-    
-
-    // if (updatedField === 'empaque') {
-    //   this.empaqueChangeMatrix(this.item_obj_seleccionado, updatedElement);
-    // }
-
-    // if (updatedField === 'cantidad_pedida') {
-    //   this.copiarValorCantidadPedidaACantidad(this.item_obj_seleccionado, updatedElement);
-    // }
-
-    // if (updatedField === 'cantidad') {
-    //   this.cantidadChangeMatrix(this.item_obj_seleccionado, updatedElement)
-    // }
   }
   // fin eventos de seleccion en la tabla
 
@@ -847,13 +769,11 @@ export class SolicitudMercaderiaUrgenteComponent implements OnInit {
     this.api.create(url, this.array_items_carrito_y_f4_catalogo).subscribe({
       next: (datav) => {
         
-
         if (datav.valido) {
           this.messageService.add({ severity: 'success', summary: 'Alerta', detail: datav.msg });
         } else { 
           this.messageService.add({ severity: 'success', summary: 'Accion Completada', detail: datav.msg });
         }
-
        
         this.validacion_post_negativos = datav.negativos;
         this.abrirTabPorLabel("Negativos");
@@ -1062,10 +982,7 @@ export class SolicitudMercaderiaUrgenteComponent implements OnInit {
     let array_submitData = {
       cabecera: valores,
       tablaDetalle: this.array_items_carrito_y_f4_catalogo
-    };
-
-    
-    
+    }; 
     
     const url = `/inventario/transac/docinsolurgente/validarMaximoVta/${this.userConn}/${this.BD_storage}`;
     const errorMessage = `La Ruta presenta fallos al hacer la creacion Ruta:- ${url}`;

@@ -8,7 +8,6 @@ import { MatDialog } from "@angular/material/dialog";
 import { DialogConfirmacionComponent } from "@modules/dialog-confirmacion/dialog-confirmacion.component";
 import { NgxSpinnerService } from "ngx-spinner";
 import { MessageService } from "primeng/api";
-
 @Injectable({
 	providedIn: 'root'
 })
@@ -31,7 +30,6 @@ export class Interceptor implements HttpInterceptor {
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		return next.handle(request).pipe(catchError(err => {
 			
-
 			this.err = err.error;
 			this.status = err.status;
 			if (this.err && this.err.resp !== undefined && this.err.resp !== null) {
@@ -54,16 +52,10 @@ export class Interceptor implements HttpInterceptor {
 				this.messageService.add({ severity: 'warn', summary: 'Alerta', detail: this.error_code  });
 			}	
 
-			// CODIGO DE ERROR PARA QUE NO SALGA EL TOAST DE ITEM NO VALIDO EN LA RUTA / inventario / mant / inmatriz / infoItemRes
-			// CODIGO DE ERROR PARA QUE NO SALGA EL TOAST DE ITEM NO VALIDO EN LA RUTA transac / veproforma / getempaques
 			if (this.error_code === 801 || this.error_code === undefined) {
-				
 			} else {
 				this.spinner.hide();
 			}
-			
-			// this.error_code === undefined ?  : 
-			// this.error_code ===  ?  : 
 
 			let cadenaResultado: string = this.error_code.toString();
 			switch (cadenaResultado) {
@@ -173,31 +165,13 @@ export class Interceptor implements HttpInterceptor {
 					break;
 			}
 
-			// switch (this.status) {
-			// 	case 401:
-			// 		this.refreshToken();
-
-			// 		this._snackBar.open('¡ USUARIO SIN TOKEN O TOKEN EXPIRADO !', '☠️', {
-			// 			duration: 3000,
-			// 			panelClass: ['coorporativo-snackbarBlue', 'login-snackbar'],
-			// 		});
-			// 		break;
-			// }
-
 			switch (this.status) {
 				case 500:
-					// this._snackBar.open('¡ ERROR 500 EN EL SERVIDOR, FALLA SERVIDOR', '☠️', {
-					// 	duration: 3000,
-					// 	panelClass: ['coorporativo-snackbarBlue', 'login-snackbar'],
-					// });
-
 					this.spinner.hide();
 					break;
 			}
 
 			const error = err.error.message || err.statusText;
-			
-
 			return throwError(error);
 		}))
 	}
@@ -208,18 +182,14 @@ export class Interceptor implements HttpInterceptor {
 			token: this.tokken.token
 		};
 
-		
-
 		let errorMessage = "La Ruta presenta fallos al hacer la creacion" + "Ruta:- /seg_adm/login/refreshToken/";
 		return this.api.createAllWithOutToken("/seg_adm/login/refreshToken/" + this.userConn, data)
 			.subscribe({
 				next: (datav) => {
 					this.refresh = datav;
-					
 				},
 
 				error: (err) => {
-					
 				},
 				complete: () => { }
 			})
