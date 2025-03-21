@@ -1,0 +1,208 @@
+{
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects": {
+        "adminlte": {
+            "projectType": "application",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
+            },
+            "root": "",
+            "sourceRoot": "src",
+            "prefix": "app",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/siaw",
+                        "index": "src/index.html",
+                        "main": "src/main.ts",
+                        "polyfills": "src/polyfills.ts",
+                        "tsConfig": "tsconfig.app.json",
+                        "assets": [
+                            "src/favicon.ico",
+                            "src/assets",
+                            "src/assets/fonts"
+                        ],
+                        "styles": [
+                            "src/styles.scss",
+                            "node_modules/ngx-toastr/toastr.css",
+                            "node_modules/ngx-spinner/animations/pacman.css",
+                            "node_modules/ngx-spinner/animations/line-scale-pulse-out-rapid.css",
+                            "node_modules/ngx-spinner/animations/square-loader.css",
+                            "node_modules/ngx-spinner/animations/ball-spin-fade-rotating.css",
+                            "node_modules/ngx-spinner/animations/timer.css",
+                            "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+                            "node_modules/primeng/resources/primeng.min.css"
+                        ],
+                        "scripts": [],
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true,
+                        "allowedCommonJsDependencies": [
+                            "canvg",
+                            "rgbcolor",
+                            "qrcode",
+                            "handsontable",
+                            "dompurify",
+                            "moment",
+                            "html2canvas",
+                            "numbro",
+                            "file-saver",
+                            "path",
+                            "os",
+                            "fs",
+                            "raf",
+
+                            "pdfmake/build/pdfmake",
+                            "core-js/modules/esnext.set.union.v2",
+                            "core-js/modules/es.json.stringify",
+                            "esnext.set.is-superset-of.v2.js'",
+                            "core-js/modules/gatekeeper-client-sdk",
+                            "core-js/modules/esnext.set.is-disjoint-from.v2.js",
+                            "core-js/modules/esnext.set.is-subset-of.v2.js",
+                            "core-js/modules/esnext.set.difference.v2.js",
+                            "core-js/modules/esnext.set.union.v2.js",
+                            "core-js/modules/es.error.cause.js",
+                            "core-js/modules/web.immediate.js",
+                            "core-js/modules/es.array.push.js",
+                            "core-js/modules/es.string.replace-all.js",
+                            "core-js/modules/es.array.at.js",
+                            "core-js/modules/es.array.unscopables.flat.js",
+                            "core-js/modules/web.immediate.js",
+                            "core-js/modules/esnext.set.intersection.v2.js",
+                            "core-js/modules/esnext.set.is-superset-of.v2.js",
+                            "core-js/modules/esnext.set.symmetric-difference.v2.js",
+                            "core-js/modules/es.json.stringify.js",
+                            "core-js/modules/es.object.from-entries.js",
+                            "core-js/modules/es.array.unscopables.flat-map.js",
+                            "core-js/modules/es.array.index-of.js",
+                            "core-js/modules/es.array.iterator.js",
+                            "core-js/modules/es.array.reduce.js",
+                            "core-js/modules/es.promise.js",
+                            "core-js/modules/es.regexp.to-string.js",
+                            "core-js/modules/es.array.reverse.js",
+                            "core-js/modules/es.string.ends-with.js",
+                            "core-js/modules/es.string.includes.js",
+                            "core-js/modules/es.string.match.js",
+                            "core-js/modules/es.string.split.js",
+                            "core-js/modules/es.string.trim.js",
+                            "core-js/modules/web.dom-collections.iterator.js",
+                            "core-js/modules/es.string.replace.js",
+                            "core-js/modules/es.string.starts-with.js"
+                        ],
+                        "serviceWorker": false,
+                        "ngswConfigPath": "ngsw-config.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "vendorChunk": true,
+                            "extractLicenses": true,
+                            "buildOptimizer": true,
+                            "sourceMap": true,
+                            "optimization": true,
+                            "aot": true,
+                            "namedChunks": false,
+                                                        
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "20mb",
+                                    "maximumError": "20mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb",
+                                    "maximumError": "10kb"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "buildTarget": "adminlte:build",
+                        "ssl": false
+                    },
+                    "configurations": {
+                        "production": {
+                            "buildTarget": "adminlte:build:production",
+                            "proxyConfig": "src/proxy.conf.json"
+                        },
+                        "development": {
+                            "buildTarget": "angularApp:build:development",
+                            "proxyConfig": "src/proxy.conf.json"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "buildTarget": "adminlte:build"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "src/test.ts",
+                        "codeCoverage": true,
+                        "polyfills": "src/polyfills.ts",
+                        "tsConfig": "tsconfig.spec.json",
+                        "karmaConfig": "karma.conf.js",
+                        "assets": [
+                            "src/favicon.ico",
+                            "src/assets",
+                            "src/assets/fonts"
+                        ],
+                        "styles": [
+                            "src/styles.scss",
+                            "node_modules/ngx-toastr/toastr.css",
+                            "node_modules/ngx-spinner/animations/ball-scale-multiple.css"
+                        ],
+                        "scripts": []
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-eslint/builder:lint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "src/**/*.ts",
+                            "src/**/*.html"
+                        ]
+                    }
+                },
+                "e2e": {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "options": {
+                        "protractorConfig": "e2e/protractor.conf.js",
+                        "devServerTarget": "adminlte:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "adminlte:serve:production"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "cli": {
+        "analytics": "43a7ce40-5fb9-4a0d-8b40-b48fc0426e9d",
+        "schematicCollections": [
+            "@angular-eslint/schematics"
+        ]
+    }
+}

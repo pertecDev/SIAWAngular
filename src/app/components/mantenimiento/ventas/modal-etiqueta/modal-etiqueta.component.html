@@ -1,0 +1,152 @@
+<section style="background-color: #f9f9f9;">
+  <div class="container-fluid">
+    <ng-container>
+      <mat-card-header class="mb-1">
+        <div class="col-md-9">
+          <mat-card-title style="font-size: 0.75rem;"><strong>Etiqueta Proforma</strong></mat-card-title>
+        </div>
+        <div class="col-md-3 float-right">
+          <div class="text-right">
+            <mat-icon color="primary" (click)="close();">close</mat-icon>
+          </div>
+        </div>
+      </mat-card-header>
+      <p-toast></p-toast>
+      <div class="container row">
+        <div class="col-md-6">
+          <span><strong>Proforma:</strong> {{ id_proforma_get }}-{{ numero_id_proforma }}</span>
+        </div>
+        <div class="col-md-6" style="text-align: end !important;">
+          <span>
+            <strong>Cliente:</strong> {{ cod_cliente_proforma }}
+          </span>&nbsp;|&nbsp;
+          <span>
+            <strong>Real:</strong> {{ cliente_real_proforma }}
+          </span>
+        </div>
+      </div>
+
+      <mat-tab-group style="background-color: #f9f9f9;">
+        <mat-tab label="Etiqueta">
+          <mat-tab-group>
+            <mat-tab *ngFor="let data_maps of data_map" label="Dirección"> 
+             
+              <mat-card style="background-color: #f9f9f9; border: 1px #093070 solid;">
+                <mat-card-content style="padding: 0px 0px 0px 0px !important;">
+                  <div class="nombre">
+                    <strong>{{ data_maps.linea1  }}</strong>
+                  </div>
+                  <input type="text" [(ngModel)]="linea2_input" style="width: 100% !important;" maxlength="25">
+                  <div class="text-center">
+                    <label>{{ data_maps.representante }}</label>
+                  </div>
+                  <div>
+                    <label>TEL.</label>
+                    <input type="text" value="{{ data_maps.telefono }}" readonly>
+                  </div>
+                  <div>
+                    <label>CEL.</label>
+                    <input type="text" value="{{ data_maps.celular }}" readonly>
+                  </div>
+    
+                  <div class="text-center">
+                    <label>{{ data_maps.ciudad }}</label><br>
+
+                    <ng-container *ngIf="data_maps?.elegida" style="text-align: center;">
+                      <span style="color: green;">ETIQUETA ELEGIDA ✅</span>
+                    </ng-container>  
+                  </div>
+
+                  <div style="text-align: right;">
+                    <button style="height: 20px !important; font-size: 0.8rem; background-color: #fbd800;"
+                      (click)="seleccionarEtiqueta(data_maps, linea2_input);" class="mdc-button mdc-button--raised">
+                      <span class="mat-mdc-button-persistent-ripple mdc-button__ripple"></span>
+                      <span class="mdc-button__label">
+                        <i class="fa fa-check"></i> Seleccionar Dirección
+                      </span>
+                    </button>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </mat-tab>
+          </mat-tab-group>
+          <!-- <mat-card style="background-color: #f9f9f9; border: 1px #093070 solid;">
+            <mat-card-content style="padding: 0px 0px 0px 0px !important;">
+              <div class="nombre">
+                <strong>{{ data_map[0]?.linea1  }}</strong>
+              </div>
+              <input type="text" [(ngModel)]="linea2_input" style="width: 100% !important;">
+              <div class="text-center">
+                <label>{{ data_map[0]?.representante }}</label>
+              </div>
+              <div>
+                <label>TEL.</label>
+                <input type="text" value="{{ data_map[0]?.telefono }}" readonly>
+              </div>
+              <div>
+                <label>CEL.</label>
+                <input type="text" value="{{ data_map[0]?.celular }}" readonly>
+              </div>
+
+              <div class="text-center">
+                <label>{{ data_map[0]?.ciudad }}</label>
+              </div>
+            </mat-card-content>
+          </mat-card> -->
+        </mat-tab>
+
+        <mat-tab label="Teléfonos de Contacto"> <br>
+          <table style="margin: auto;width: 100%;text-align: center;">
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Nro. Teléfono</th>
+                <th>Pertenece a: </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let datas of data.telefonos">
+                <td style="text-align:center;">{{ datas.tipo }}</td>
+                <td style="text-align:center;">{{ datas.telf }}</td>
+                <td style="text-align:center;">{{ datas.nomtelf}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </mat-tab>
+
+        <mat-tab label="Georeferencia"><br>
+          <div *ngFor="let data_maps of data_map" class="text-center">
+            <div>
+              <strong>{{ data_maps.representante  }}</strong>
+            </div>
+            <label>LATITUD: </label>
+            <label>{{ data_maps.latitud_entrega }}</label> <br>
+            <label>LONGITUD: </label>
+            <label>{{ data_maps.longitud_entrega }}</label>
+            <div class="text-center">
+              <label>{{ data_maps.ciudad }}</label>
+            </div>
+            <div class="text-center">
+              <a href="https://www.google.com/maps/search/?api=1&query={{ data_maps.latitud_entrega }}%2C{{ data_maps.longitud_entrega }}" target="_blank">
+                <i class="fa fa-map" aria-hidden="true"></i> VER EN MAPS
+              </a>              
+            </div>
+            <mat-divider></mat-divider>
+          </div>
+
+        </mat-tab>
+      </mat-tab-group>
+
+      <div class="row float-right" style="margin-bottom: 7px;padding-block-start: 5px !important;">
+        <button mat-raised-button class="btn btn-outline-secondary form-control-sm mr-1" (click)="close();">
+          <span><i class="fa fa-times" aria-hidden="true" style="color: #ff0707;"></i> Cancelar</span>
+        </button>
+
+        <button mat-raised-button class="btn btn-outline-secondary form-control-sm mr-1"
+          (click)="enviarArrayToProforma();" [disabled]="longitud_etiqueta === 0">
+          <span><i class="fa fa-save" aria-hidden="true" style="color: #ffc107;"></i> Grabar</span>
+        </button><br>
+      </div>
+    </ng-container>
+  </div>
+</section>

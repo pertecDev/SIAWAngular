@@ -1,0 +1,8 @@
+{
+  "/API_SIAW/api/*": {
+    "target": "http://192.168.31.240",
+    "secure": false,
+    "changeOrigin": false,
+    "logLevel": "debug"
+  }
+}

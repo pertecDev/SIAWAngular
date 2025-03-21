@@ -1,0 +1,25 @@
+
+::ng-deep {
+    .mat-mdc-dialog-container .mdc-dialog__surface{
+        background-color: #f9f9f9 !important;
+    }
+    .mat-mdc-tab-header{
+        border: 1px #093070 solid;
+    }
+    .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper{
+        width: 150px !important;
+    }
+}
+.nombre{
+    background-color: black;
+    color: #f6ff00;
+    height: 2rem;
+    text-align: center;
+    display: grid;
+    align-items: center;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
